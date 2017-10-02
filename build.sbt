@@ -1,12 +1,21 @@
 import Dependencies._
 
-lazy val root = (project in file(".")).
-  settings(
+//import sbtdocker._
+
+lazy val root = (project in file("."))
+  .settings(
     inThisBuild(List(
-      organization := "com.example",
+      organization := "org.silvino",
       scalaVersion := "2.12.3",
       version      := "0.1.0-SNAPSHOT"
     )),
-    name := "Hello",
-    libraryDependencies += scalaTest % Test
+    name := "stash-user-service",
+    libraryDependencies ++= dependencies
   )
+
+lazy val dependencies = Seq(
+  "org.mockito"          % "mockito-core"           % "2.8.47" % Test,
+  scalaTest % Test
+)
+
+mainClass in (Compile, run) := Some("silvino.Main")
